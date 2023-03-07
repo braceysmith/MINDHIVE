@@ -7,6 +7,7 @@ public class PuckReactor : MonoBehaviour
     [SerializeField] private Color _highlightColor = Color.red;
     private Color _originalColor;
     private Renderer _renderer;
+    private int beams = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class PuckReactor : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         _renderer.material.color = _highlightColor;
+        beams++;
         // We are only interested in Beamers
         // we should be using tags but for the sake of distribution, let's simply check by name.
         if (!other.name.Contains("Beam"))
@@ -26,8 +28,6 @@ public class PuckReactor : MonoBehaviour
             _renderer.material.color = _highlightColor;
             return;
         }
-
-        //this.Health -= 0.1f;
     }
 
     /// <summary>
@@ -38,18 +38,9 @@ public class PuckReactor : MonoBehaviour
     public void OnTriggerExit(Collider other)
     {
 
-        _renderer.material.color = _originalColor;
-
-        // We are only interested in Beamers
-        // we should be using tags but for the sake of distribution, let's simply check by name.
-        if (!other.name.Contains("Beam"))
-        {
-            Debug.Log("Beam left");
+        beams--;
+        if(beams==0)
             _renderer.material.color = _originalColor;
-            return;
-        }
-
-        // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
-        //this.Health -= 0.1f*Time.deltaTime;
+        
     }
 }
