@@ -9,9 +9,24 @@ public class PuckReactor : MonoBehaviour
     private Renderer _renderer;
     private int beams = 0;
 
+    [SerializeField] private float _rotationAngle = 180.0f;
+    [SerializeField] private float _rotationTime = .25f;
+    private float rotX;
+    private float rotZ;
+    [SerializeField]
+    private GameObject tile;
+    [SerializeField]
+    private GameObject[] location;
+    private GameObject selectedLocation;
+    private Quaternion startRotation;
+    private Quaternion endRotation;
+
     // Start is called before the first frame update
     void Start()
     {
+        startRotation = tile.transform.localRotation;
+        rotX = transform.localRotation.eulerAngles.x;
+        rotZ = transform.localRotation.eulerAngles.z;
         _renderer = GetComponent<Renderer>();
         _originalColor = _renderer.material.color;
     }
@@ -20,6 +35,12 @@ public class PuckReactor : MonoBehaviour
     {
         _renderer.material.color = _highlightColor;
         beams++;
+        if (tile != null)
+        {
+            SelectLocation();
+            StopCoroutine("RotateBack");
+            StartCoroutine("Rotate");
+        }
         // We are only interested in Beamers
         // we should be using tags but for the sake of distribution, let's simply check by name.
         if (!other.name.Contains("Beam"))
@@ -41,6 +62,59 @@ public class PuckReactor : MonoBehaviour
         beams--;
         if(beams==0)
             _renderer.material.color = _originalColor;
-        
+        if (tile != null)
+        {
+            StopCoroutine("Rotate");
+            StartCoroutine("RotateBack");
+        }
+
+    }
+
+    IEnumerator Rotate()
+    {
+        Quaternion currentRotation = tile.transform.localRotation;
+        endRotation = startRotation * Quaternion.Euler(rotX, _rotationAngle, rotZ);
+
+        float t = 0.0f;
+        while (t < 1.0f)
+        {
+            t += Time.deltaTime / _rotationTime;
+            tile.transform.localRotation = Quaternion.Lerp(currentRotation, endRotation, t);
+            yield return null;
+        }
+    }
+
+    IEnumerator RotateBack()
+    {
+        Quaternion currentRotation = tile.transform.localRotation;
+
+        float t = 0.0f;
+        while (t < 1.0f)
+        {
+            t += Time.deltaTime / _rotationTime;
+            tile.transform.localRotation = Quaternion.Lerp(currentRotation, startRotation, t);
+            yield return null;
+        }
+        if (selectedLocation != null)
+            Destroy(selectedLocation);
+    }
+
+    private void SelectLocation()
+    {
+        if (location.Length == 0)
+        {
+            Debug.LogError("No objects no locations.");
+            return;
+        }
+        GameObject tileChild = tile.transform.GetChild(0).gameObject;
+        int randomIndex = Random.Range(0, location.Length);
+        GameObject selectedObjectPrefab = location[randomIndex];
+
+        selectedLocation = Instantiate(selectedObjectPrefab);
+        selectedLocation.transform.parent = tileChild.transform;
+        selectedLocation.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        selectedLocation.transform.localPosition = new Vector3(0, .01f, 0);
+        selectedLocation.transform.localScale = Vector3.one;
+        //Debug.Log($"Selected object: {selectedObject.name}");
     }
 }
