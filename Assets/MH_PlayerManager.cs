@@ -30,6 +30,10 @@ namespace Photon.Pun.Demo.PunBasics
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
 
+        [SerializeField] private GameObject beam;
+        private GameObject cameraFollower;
+
+
         #endregion
 
         #region Private Fields
@@ -68,6 +72,9 @@ namespace Photon.Pun.Demo.PunBasics
             if (photonView.IsMine)
             {
                 LocalPlayerInstance = gameObject;
+                if (beam != null)
+                    beam.SetActive(false);
+                cameraFollower = GameObject.Find("CameraFollower");
             }
 
             // #Critical
@@ -136,18 +143,25 @@ namespace Photon.Pun.Demo.PunBasics
             if (photonView.IsMine)
             {
                 this.ProcessInputs();
+                if (cameraFollower != null)
+                {
+                    transform.rotation = cameraFollower.transform.rotation;
+                    transform.position = cameraFollower.transform.position;
+                }
 
                 //if (this.Health <= 0f && !this.leavingRoom)
                 //{
                 // this.leavingRoom = GameManager.Instance.LeaveRoom();
                 //}
-                float verticalInput = Input.GetAxis("Vertical");
-                float horizontalInput = Input.GetAxis("Horizontal");
 
-                float verticalRotation = verticalInput * _rotationSpeed * Time.deltaTime;
-                float horizontalRotation = horizontalInput * _rotationSpeed * Time.deltaTime;
 
-                transform.Rotate(-verticalRotation, horizontalRotation, 0);
+                //float verticalInput = Input.GetAxis("Vertical");
+                //float horizontalInput = Input.GetAxis("Horizontal");
+
+                //float verticalRotation = verticalInput * _rotationSpeed * Time.deltaTime;
+                //float horizontalRotation = horizontalInput * _rotationSpeed * Time.deltaTime;
+
+                //transform.Rotate(-verticalRotation, horizontalRotation, 0);
             }
 
             //if (this.beams != null && this.IsFiring != this.beams.activeInHierarchy)
