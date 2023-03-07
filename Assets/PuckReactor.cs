@@ -5,24 +5,24 @@ using UnityEngine;
 public class PuckReactor : MonoBehaviour
 {
     [SerializeField] private Color _highlightColor = Color.red;
-
-    private Material _originalMaterial;
+    private Color _originalColor;
     private Renderer _renderer;
 
     // Start is called before the first frame update
     void Start()
     {
         _renderer = GetComponent<Renderer>();
-        _originalMaterial = _renderer.material;
+        _originalColor = _renderer.material.color;
     }
 
     public void OnTriggerEnter(Collider other)
     {
-
+        _renderer.material.color = _highlightColor;
         // We are only interested in Beamers
         // we should be using tags but for the sake of distribution, let's simply check by name.
         if (!other.name.Contains("Beam"))
         {
+            Debug.Log("Beam hit");
             _renderer.material.color = _highlightColor;
             return;
         }
@@ -35,15 +35,17 @@ public class PuckReactor : MonoBehaviour
     /// We're going to affect health while the beams are interesting the player
     /// </summary>
     /// <param name="other">Other.</param>
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerExit(Collider other)
     {
-        
+
+        _renderer.material.color = _originalColor;
 
         // We are only interested in Beamers
         // we should be using tags but for the sake of distribution, let's simply check by name.
         if (!other.name.Contains("Beam"))
         {
-            _renderer.material.color = _originalMaterial.color;
+            Debug.Log("Beam left");
+            _renderer.material.color = _originalColor;
             return;
         }
 
