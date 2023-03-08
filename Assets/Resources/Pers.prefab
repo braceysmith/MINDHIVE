@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3113730497628283728}
   - component: {fileID: 1358809139378823454}
   - component: {fileID: 4683237049793951836}
-  - component: {fileID: 1007224333}
   - component: {fileID: 1080253198613451750}
   m_Layer: 0
   m_Name: Pers
@@ -76,23 +75,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
---- !u!114 &1007224333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166961084166592156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd08475b23aa548b7b9d28397d430b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 0
-  height: 0
-  centerOffset: {x: 0, y: 0, z: 0}
-  followOnStart: 0
-  smoothSpeed: 10
 --- !u!114 &1080253198613451750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +88,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 1
-  _rotationSpeed: 50
   beam: {fileID: 7373833853073650007}
 --- !u!1 &7373833853073650007
 GameObject:

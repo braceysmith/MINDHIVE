@@ -25,13 +25,13 @@ namespace Photon.Pun.Demo.PunBasics
 
         //[Tooltip("The current Health of our player")]
         public float Health = 1f;
-        [SerializeField] private float _rotationSpeed = 50.0f;
+        //[SerializeField] private float _rotationSpeed = 50.0f;
 
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
 
         [SerializeField] private GameObject beam;
-        private GameObject cameraFollower;
+       // private GameObject cameraFollower;
 
 
         #endregion
@@ -74,7 +74,7 @@ namespace Photon.Pun.Demo.PunBasics
                 LocalPlayerInstance = gameObject;
                 if (beam != null)
                     beam.SetActive(false);
-                cameraFollower = GameObject.Find("CameraFollower");
+                //cameraFollower = GameObject.Find("CameraFollower");
             }
 
             // #Critical
@@ -87,19 +87,19 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         public void Start()
         {
-            CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
+            //CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
 
-            if (_cameraWork != null)
-            {
-                if (photonView.IsMine)
-                {
-                    _cameraWork.OnStartFollowing();
-                }
-            }
-            else
-            {
-                Debug.LogError("<Color=Red><b>Missing</b></Color> CameraWork Component on player Prefab.", this);
-            }
+            //if (_cameraWork != null)
+            //{
+             //   if (photonView.IsMine)
+              //  {
+             //       _cameraWork.OnStartFollowing();
+            //    }
+            //}
+           // else
+            //{
+            //    Debug.LogError("<Color=Red><b>Missing</b></Color> CameraWork Component on player Prefab.", this);
+           // }
 
             // Create the UI
             //if (this.playerUiPrefab != null)
@@ -143,17 +143,21 @@ namespace Photon.Pun.Demo.PunBasics
             if (photonView.IsMine)
             {
                 this.ProcessInputs();
-                if (cameraFollower != null)
-                {
-                    transform.rotation = cameraFollower.transform.rotation;
-                    transform.position = cameraFollower.transform.position;
-                }
+                //if (cameraFollower != null)
+                //{
+                //   transform.rotation = cameraFollower.transform.rotation;
+                //  transform.position = cameraFollower.transform.position;
+                //}
 
                 //if (this.Health <= 0f && !this.leavingRoom)
                 //{
                 // this.leavingRoom = GameManager.Instance.LeaveRoom();
                 //}
 
+                //if (!this.leavingRoom)
+                //{
+                // this.leavingRoom = GameManager.Instance.LeaveRoom();
+                //}
 
                 //float verticalInput = Input.GetAxis("Vertical");
                 //float horizontalInput = Input.GetAxis("Horizontal");
