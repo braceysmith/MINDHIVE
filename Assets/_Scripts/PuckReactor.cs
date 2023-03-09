@@ -12,7 +12,7 @@ public class PuckReactor : MonoBehaviour
     [SerializeField] private float _rotationAngle = 180.0f;
     [SerializeField] private float _rotationTime = .25f;
     private float rotX;
-    private float rotZ;
+    private float rotY;
     [SerializeField]
     private GameObject tile;
     [SerializeField]
@@ -26,7 +26,7 @@ public class PuckReactor : MonoBehaviour
     {
         startRotation = tile.transform.localRotation;
         rotX = transform.localRotation.eulerAngles.x;
-        rotZ = transform.localRotation.eulerAngles.z;
+        rotY = transform.localRotation.eulerAngles.y;
         _renderer = GetComponent<Renderer>();
         _originalColor = _renderer.material.color;
     }
@@ -73,7 +73,7 @@ public class PuckReactor : MonoBehaviour
     IEnumerator Rotate()
     {
         Quaternion currentRotation = tile.transform.localRotation;
-        endRotation = startRotation * Quaternion.Euler(rotX, _rotationAngle, rotZ);
+        endRotation = startRotation * Quaternion.Euler(rotX, rotY, _rotationAngle);
 
         float t = 0.0f;
         while (t < 1.0f)

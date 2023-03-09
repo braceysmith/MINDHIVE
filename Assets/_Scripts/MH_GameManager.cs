@@ -31,7 +31,7 @@ namespace Photon.Pun.Demo.PunBasics
         static public MH_GameManager Instance;
         public string scene = "Murmuration";
         public string loader = "Murmuration_Launcher";
-
+        public GameObject[] hivePuck;
         #endregion
 
         #region Private Fields
@@ -156,6 +156,31 @@ namespace Photon.Pun.Demo.PunBasics
         public void QuitApplication()
         {
             Application.Quit();
+        }
+
+        // This function will handle the trigger activation
+        public static void HandleTriggerActivation(int viewID)
+        {
+            // Use PhotonView.Find to obtain the interactive object across the network
+            PhotonView interactiveObjectView = PhotonView.Find(viewID);
+
+            // Call a function on the interactive object to handle the activation
+            interactiveObjectView.GetComponent<InteractiveObject>().HandleActivation();
+        }
+
+        // This function will be called by the interactive object to handle the activation
+        public static void InteractiveObjectActivated()
+        {
+            Debug.Log("Interactive object activated!");
+        }
+
+        public static void HandlePuckTriggerActivation(int viewID)
+        {
+            // Use PhotonView.Find to obtain the interactive object across the network
+            PhotonView interactiveObjectView = PhotonView.Find(viewID);
+
+            // Call a function on the interactive object to handle the activation
+            interactiveObjectView.GetComponent<InteractiveObject>().HandleActivation();
         }
 
         #endregion
