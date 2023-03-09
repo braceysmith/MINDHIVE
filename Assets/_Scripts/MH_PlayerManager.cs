@@ -154,10 +154,10 @@ namespace Photon.Pun.Demo.PunBasics
                 // this.leavingRoom = GameManager.Instance.LeaveRoom();
                 //}
 
-                //if (!this.leavingRoom)
-                //{
-                // this.leavingRoom = GameManager.Instance.LeaveRoom();
-                //}
+                if (this.leavingRoom)
+                {
+                this.leavingRoom = GameManager.Instance.LeaveRoom();
+                }
 
                 //float verticalInput = Input.GetAxis("Vertical");
                 //float horizontalInput = Input.GetAxis("Horizontal");
