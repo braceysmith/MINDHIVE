@@ -180,7 +180,16 @@ namespace Photon.Pun.Demo.PunBasics
             PhotonView interactiveObjectView = PhotonView.Find(viewID);
 
             // Call a function on the interactive object to handle the activation
-            interactiveObjectView.GetComponent<InteractiveObject>().HandleActivation();
+            interactiveObjectView.GetComponent<PuckReactor>().Flock();
+        }
+
+        public static void HandlePuckTriggerDectivation(int viewID)
+        {
+            // Use PhotonView.Find to obtain the interactive object across the network
+            PhotonView interactiveObjectView = PhotonView.Find(viewID);
+
+            // Call a function on the interactive object to handle the activation
+            interactiveObjectView.GetComponent<PuckReactor>().NoFlock();
         }
 
         #endregion

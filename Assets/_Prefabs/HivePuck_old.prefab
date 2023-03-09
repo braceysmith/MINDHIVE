@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 127
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7469320552531838830
 Transform:
@@ -42,14 +42,6 @@ PrefabInstance:
     - target: {fileID: 7257826067619129607, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257826067619129607, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257826067619129607, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7257826067619129607, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -93,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8066838594686448573, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
       propertyPath: m_Name
-      value: HivePuck
+      value: Tile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}

@@ -32,8 +32,5 @@ public class InteractiveObject : MonoBehaviourPun
 
     }
 
-    public void PuckViewed()
-    {
-
-    }
+  
 }
