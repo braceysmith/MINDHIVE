@@ -14,8 +14,11 @@ namespace Photon.Pun.Demo.PunBasics
         }
         public void OnTriggerEnter(Collider other)
         {
-            manager.NextLevel();
-            Destroy(this.gameObject);
+            if (other.gameObject.name == "MainBeam")
+            {
+                manager.NextLevel();
+                Destroy(this.gameObject);
+            }
         }
     }
 }

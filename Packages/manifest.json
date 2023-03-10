@@ -15,6 +15,7 @@
     "com.unity.timeline": "1.6.4",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.7.8",
+    "com.unity.xr.oculus": "3.0.2",
     "io.extendreality.tilia.camerarigs.trackedalias.unity": "2.0.7",
     "io.extendreality.tilia.indicators.objectpointers.unity": "2.1.13",
     "io.extendreality.tilia.interactions.interactables.unity": "2.10.0",

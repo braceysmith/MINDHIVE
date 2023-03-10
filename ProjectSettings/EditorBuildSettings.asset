@@ -12,5 +12,6 @@ EditorBuildSettings:
     path: Assets/_Scenes/Murmuration.unity
     guid: ee43015d7dcde9b4cb06e5e57ca0ee8b
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 997d3498cc6584945ae0e21add6fddfc, type: 2}
     WebXR.Settings: {fileID: 11400000, guid: 30f5110d0882f764aa33ba53edb68b29, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c424fcc84f9254e4d910a7f52b8f048e, type: 2}
