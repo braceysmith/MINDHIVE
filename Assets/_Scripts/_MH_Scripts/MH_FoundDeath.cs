@@ -11,13 +11,13 @@ namespace Photon.Pun.Demo.PunBasics
 
         private void Start()
         {
-            manager = FindObjectOfType<MH_GameManager>();
+            manager = GameObject.Find("MH_Game Manager").GetComponent<MH_GameManager>();
         }
 
         public void OnTriggerEnter(Collider other)
         {
             manager.Death();
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }

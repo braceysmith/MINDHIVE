@@ -169,8 +169,8 @@ public class PuckReactor : MonoBehaviour
             return;
         }
         GameObject tileChild = tile.transform.GetChild(0).gameObject;
-        int randomIndex = Random.Range(0, location.Length);
-        GameObject selectedObjectPrefab = location[randomIndex];
+        int randomIndex = Random.Range(0, safeIslands.Length);
+        GameObject selectedObjectPrefab = safeIslands[randomIndex];
 
         selectedLocation = Instantiate(selectedObjectPrefab);
         selectedLocation.transform.parent = tileChild.transform;

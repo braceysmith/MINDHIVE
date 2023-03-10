@@ -60,7 +60,6 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
-            player = FindObjectOfType<MH_PlayerManager>();
             Instance = this;
 
             // in case we started this demo with the wrong scene being active, simply load the menu scene
@@ -95,6 +94,8 @@ namespace Photon.Pun.Demo.PunBasics
 
 
             }
+
+            player = GameObject.Find("Pers(Clone)").GetComponent<MH_PlayerManager>();
             AddFood();
         }
         
@@ -274,9 +275,10 @@ namespace Photon.Pun.Demo.PunBasics
             else
             {
                 GameObject interactive = Instantiate(prefab);
-                interactive.transform.SetParent(activeTiles[tileNum].transform);
-                interactive.transform.localPosition = new Vector3(0, .2f, 0);
+                interactive.transform.SetParent(activeTiles[tileNum].transform.GetChild(0).transform.GetChild(0).transform);
+                interactive.transform.localPosition = new Vector3(1.5f, 0, 0);
                 interactive.transform.localScale = new Vector3(1,.2f,1);
+                interactive.transform.localEulerAngles = new Vector3(0, 0, -90);
             }
         }
 

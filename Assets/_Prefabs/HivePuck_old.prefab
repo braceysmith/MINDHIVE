@@ -64,6 +64,10 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4540125366256455590, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
+      propertyPath: _rotationTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540125366256455590, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
       propertyPath: safeIslands.Array.size
       value: 10
       objectReference: {fileID: 0}

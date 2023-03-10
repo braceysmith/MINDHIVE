@@ -6,13 +6,16 @@ namespace Photon.Pun.Demo.PunBasics
 {
     public class MH_FoundFood : MonoBehaviour
     {
-       [SerializeField] private GameObject manager;
-       // MH_PlayerManager player;
-       
+       MH_GameManager manager;
+
+        private void Start()
+        {
+            manager = GameObject.Find("MH_Game Manager").GetComponent<MH_GameManager>();
+        }
         public void OnTriggerEnter(Collider other)
         {
-            manager.GetComponent<MH_GameManager>().NextLevel();
-            Destroy(this);
+            manager.NextLevel();
+            Destroy(this.gameObject);
         }
     }
 }
