@@ -8,6 +8,7 @@
 // <author>developer@exitgames.com</author>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -31,16 +32,17 @@ namespace Photon.Pun.Demo.PunBasics
         public static GameObject LocalPlayerInstance;
 
         [SerializeField] private GameObject beam;
-       // private GameObject cameraFollower;
+        //[SerializeField] private GameObject UIAnchor;
 
+        public float deathFloat = .01f;
 
         #endregion
 
         #region Private Fields
 
-        //[Tooltip("The Player's UI GameObject Prefab")]
-        //[SerializeField]
-        //private GameObject playerUiPrefab;
+        [Tooltip("The Player's UI GameObject Prefab")]
+        [SerializeField]
+        private GameObject playerUiPrefab;
 
         //[Tooltip("The Beams GameObject to control")]
         //[SerializeField]
@@ -102,15 +104,18 @@ namespace Photon.Pun.Demo.PunBasics
            // }
 
             // Create the UI
-            //if (this.playerUiPrefab != null)
-            //{
-            //    GameObject _uiGo = Instantiate(this.playerUiPrefab);
-            //    _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
-            //}
-            //else
-            //{
-            //   Debug.LogWarning("<Color=Red><b>Missing</b></Color> PlayerUiPrefab reference on player Prefab.", this);
-            //}
+            if (this.playerUiPrefab != null && photonView.IsMine)
+            {
+                GameObject _uiGo = Instantiate(this.playerUiPrefab);
+                _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+                //_uiGo.transform.SetParent(UIAnchor.transform);
+                //_uiGo.transform.localPosition = Vector3.zero;
+                //_uiGo.transform.localScale = Vector3.one;
+            }
+            else
+            {
+               Debug.LogWarning("<Color=Red><b>Missing</b></Color> PlayerUiPrefab reference on player Prefab.", this);
+            }
 
 #if UNITY_5_4_OR_NEWER
             // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
@@ -149,15 +154,15 @@ namespace Photon.Pun.Demo.PunBasics
                 //  transform.position = cameraFollower.transform.position;
                 //}
 
-                //if (this.Health <= 0f && !this.leavingRoom)
-                //{
-                // this.leavingRoom = GameManager.Instance.LeaveRoom();
-                //}
-
-                if (this.leavingRoom)
+                if (this.Health <= 0f && !this.leavingRoom)
                 {
-                this.leavingRoom = GameManager.Instance.LeaveRoom();
+                    Death();
                 }
+
+                //if (this.leavingRoom)
+                //{
+                //this.leavingRoom = GameManager.Instance.LeaveRoom();
+                //}
 
                 //float verticalInput = Input.GetAxis("Vertical");
                 //float horizontalInput = Input.GetAxis("Horizontal");
@@ -167,7 +172,7 @@ namespace Photon.Pun.Demo.PunBasics
 
                 //transform.Rotate(-verticalRotation, horizontalRotation, 0);
             }
-
+            this.Health -= deathFloat * Time.deltaTime;
             //if (this.beams != null && this.IsFiring != this.beams.activeInHierarchy)
             //{
             //    this.beams.SetActive(this.IsFiring);
@@ -225,6 +230,16 @@ namespace Photon.Pun.Demo.PunBasics
 
             // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
             //this.Health -= 0.1f*Time.deltaTime;
+        }
+
+        public void Heal()
+        {
+            Health = 1;
+        }
+
+        public void Death()
+        {
+            this.leavingRoom = MH_GameManager.Instance.LeaveRoom();
         }
 
 
@@ -315,6 +330,11 @@ namespace Photon.Pun.Demo.PunBasics
                 //this.Health = (float)stream.ReceiveNext();
             }
         }
+
+        //public static implicit operator MH_PlayerManager(PlayerManager v)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         #endregion
     }

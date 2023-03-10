@@ -16,6 +16,7 @@ public class PuckReactor : MonoBehaviour
 
     [SerializeField] private float _rotationAngle = 180.0f;
     [SerializeField] private float _rotationTime = .25f;
+    [SerializeField] private float _rotationBackTime = 1f;
     private float rotX;
     private float rotY;
     [SerializeField]
@@ -65,9 +66,10 @@ public class PuckReactor : MonoBehaviour
         beams++;
 
         ActivateRotation();
-        Flock();
-        //int playerCount = PhotonNetwork.PlayerList.Length;
-        //if (beams == playerCount)
+        
+        int playerCount = PhotonNetwork.PlayerList.Length;
+        if (beams>1 && beams == playerCount)
+            Flock();
             //PreFlockBroadcast();
 
 
@@ -151,7 +153,7 @@ public class PuckReactor : MonoBehaviour
         float t = 0.0f;
         while (t < 1.0f)
         {
-            t += Time.deltaTime / _rotationTime;
+            t += Time.deltaTime / _rotationBackTime;
             tile.transform.localRotation = Quaternion.Lerp(currentRotation, startRotation, t);
             yield return null;
         }
@@ -174,7 +176,7 @@ public class PuckReactor : MonoBehaviour
         selectedLocation.transform.parent = tileChild.transform;
         selectedLocation.transform.localRotation = Quaternion.Euler(0, 0, 0);
         selectedLocation.transform.localPosition = new Vector3(0, .01f, 0);
-        selectedLocation.transform.localScale = Vector3.one;
+        selectedLocation.transform.localScale = new Vector3(.9f,2,.9f);
         //Debug.Log($"Selected object: {selectedObject.name}");
     }
     

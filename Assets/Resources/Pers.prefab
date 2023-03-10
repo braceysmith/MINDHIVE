@@ -89,6 +89,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1
   beam: {fileID: 7373833853073650007}
+  deathFloat: 0.03
+  playerUiPrefab: {fileID: 170056, guid: 7e128701d32afac49bf2978ea1159efa, type: 3}
 --- !u!1 &7373833853073650007
 GameObject:
   m_ObjectHideFlags: 0

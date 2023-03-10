@@ -31,7 +31,7 @@ namespace Photon.Pun.Demo.PunBasics
         static public MH_GameManager Instance;
         public string scene = "Murmuration";
         public string loader = "Murmuration_Launcher";
-        public GameObject[] hivePuck;
+        public GameObject[] activeTiles;
         #endregion
 
         #region Private Fields
@@ -42,6 +42,15 @@ namespace Photon.Pun.Demo.PunBasics
         [SerializeField]
         private GameObject playerPrefab;
 
+        [SerializeField]
+        private GameObject foodPrefab;
+
+        [SerializeField]
+        private GameObject deathPrefab;
+
+        private int level;
+
+        MH_PlayerManager player;
         #endregion
 
         #region MonoBehaviour CallBacks
@@ -51,6 +60,7 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
+            player = FindObjectOfType<MH_PlayerManager>();
             Instance = this;
 
             // in case we started this demo with the wrong scene being active, simply load the menu scene
@@ -84,6 +94,44 @@ namespace Photon.Pun.Demo.PunBasics
                 }
 
 
+            }
+            AddFood();
+        }
+        
+        //next season
+        public void NextLevel()
+        {
+            player.Heal();
+            level++;
+            for(int i = 0; i*2<level; i++)
+            {
+                AddFood();
+            }
+
+            for(int j = 0; j<level; j++)
+            {
+                AddDeath();
+            }
+        }
+
+        public void Death()
+        {
+            LeaveRoom();
+        }
+
+        private void AddFood()
+        {
+            if (foodPrefab != null)
+            {
+                ChooseEmptyTile(foodPrefab);
+            }
+        }
+
+        private void AddDeath()
+        {
+            if (foodPrefab != null)
+            {
+                ChooseEmptyTile(deathPrefab);
             }
 
         }
@@ -207,6 +255,29 @@ namespace Photon.Pun.Demo.PunBasics
 
 
             PhotonNetwork.LoadLevel(scene);
+        }
+
+        private void ChooseEmptyTile(GameObject prefab)
+        {
+            // Choose a random game object from the array
+            int randomIndex = Random.Range(0, activeTiles.Length);
+            AddInteractive(randomIndex, prefab);
+        }
+
+        public void AddInteractive(int tileNum, GameObject prefab)
+        {
+            if (activeTiles[tileNum].transform.childCount > 1)
+            {
+                ChooseEmptyTile(prefab);
+                return;
+            }
+            else
+            {
+                GameObject interactive = Instantiate(prefab);
+                interactive.transform.SetParent(activeTiles[tileNum].transform);
+                interactive.transform.localPosition = new Vector3(0, .2f, 0);
+                interactive.transform.localScale = new Vector3(1,.2f,1);
+            }
         }
 
         #endregion
