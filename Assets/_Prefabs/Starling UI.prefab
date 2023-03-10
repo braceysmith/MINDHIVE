@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 11470066}
   - component: {fileID: 225577372249270236}
   - component: {fileID: 5321950416432756213}
-  - component: {fileID: 2745026080030069798}
   m_Layer: 5
   m_Name: Starling UI
   m_TagString: Untagged
@@ -125,7 +124,7 @@ RectTransform:
   m_GameObject: {fileID: 170056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: 0.019999998, y: 0.019999998, z: 0.020000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 22470058}
@@ -217,25 +216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenOffset: {x: 0, y: 30, z: 0}
   playerHealthSlider: {fileID: 11470066}
---- !u!1183024399 &2745026080030069798
-LookAtConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170056}
-  m_Enabled: 1
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_Roll: 0
-  m_WorldUpObject: {fileID: 0}
-  m_UseUpObject: 0
-  m_IsContraintActive: 1
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
 --- !u!1 &170058
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.53333336, g: 0.86666673, b: 1, a: 1}
+  m_Color: {r: 0.6792453, g: 0, b: 0.046018206, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

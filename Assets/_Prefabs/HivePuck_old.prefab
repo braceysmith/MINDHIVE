@@ -68,6 +68,18 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4540125366256455590, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
+      propertyPath: _highlightColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540125366256455590, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
+      propertyPath: _highlightColor.g
+      value: 0.4462726
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540125366256455590, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
+      propertyPath: _highlightColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540125366256455590, guid: 68ac4bc2063a03048bd20eaf5a999f4f, type: 3}
       propertyPath: safeIslands.Array.size
       value: 10
       objectReference: {fileID: 0}

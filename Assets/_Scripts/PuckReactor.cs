@@ -65,20 +65,23 @@ public class PuckReactor : MonoBehaviour
         _renderer.material.color = _highlightColor;
         beams++;
 
-        ActivateRotation();
+        if (other.gameObject.name == "MainBeam")
+            ActivateRotation();
         
         int playerCount = PhotonNetwork.PlayerList.Length;
         if (beams>1 && beams == playerCount)
             Flock();
             //PreFlockBroadcast();
 
+        if(beams==2 && playerCount==1)
+            Flock();
 
-       Debug.Log("TriggerEEnter for ID: " + pV.ViewID);
+        //Debug.Log("TriggerEEnter for ID: " + pV.ViewID);
         // We are only interested in Beamers
         // we should be using tags but for the sake of distribution, let's simply check by name.
         if (!other.name.Contains("Beam"))
         {
-            Debug.Log("Beam hit");
+            //Debug.Log("Beam hit");
             _renderer.material.color = _highlightColor;
             return;
         }
@@ -93,7 +96,7 @@ public class PuckReactor : MonoBehaviour
     {
 
 
-        Debug.Log("TriggerExit for ID: " + pV.ViewID);
+        //Debug.Log("TriggerExit for ID: " + pV.ViewID);
         beams--;
         if(beams==0)
             _renderer.material.color = _originalColor;

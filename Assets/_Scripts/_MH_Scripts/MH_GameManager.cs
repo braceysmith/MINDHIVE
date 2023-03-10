@@ -32,6 +32,7 @@ namespace Photon.Pun.Demo.PunBasics
         public string scene = "Murmuration";
         public string loader = "Murmuration_Launcher";
         public GameObject[] activeTiles;
+        public AudioSource aS;
         #endregion
 
         #region Private Fields
@@ -103,6 +104,7 @@ namespace Photon.Pun.Demo.PunBasics
         public void NextLevel()
         {
             player.Heal();
+            aS.Play();
             level++;
             for(int i = 0; i*2<level; i++)
             {
@@ -267,7 +269,7 @@ namespace Photon.Pun.Demo.PunBasics
 
         public void AddInteractive(int tileNum, GameObject prefab)
         {
-            if (activeTiles[tileNum].transform.childCount > 1)
+            if (activeTiles[tileNum].transform.GetChild(0).transform.GetChild(0).transform.childCount > 1)
             {
                 ChooseEmptyTile(prefab);
                 return;

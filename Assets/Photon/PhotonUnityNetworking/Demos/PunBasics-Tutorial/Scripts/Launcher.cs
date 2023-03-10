@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 using Photon.Realtime;
 
@@ -41,15 +42,18 @@ namespace Photon.Pun.Demo.PunBasics
 		[SerializeField]
 		private LoaderAnime loaderAnime;
 
-		#endregion
+        //[SerializeField] private Text countdownText;
+        public float timeRemaining = 5.0f;
 
-		#region Private Fields
-		/// <summary>
-		/// Keep track of the current process. Since connection is asynchronous and is based on several callbacks from Photon, 
-		/// we need to keep track of this to properly adjust the behavior when we receive call back by Photon.
-		/// Typically this is used for the OnConnectedToMaster() callback.
-		/// </summary>
-		bool isConnecting;
+        #endregion
+
+        #region Private Fields
+        /// <summary>
+        /// Keep track of the current process. Since connection is asynchronous and is based on several callbacks from Photon, 
+        /// we need to keep track of this to properly adjust the behavior when we receive call back by Photon.
+        /// Typically this is used for the OnConnectedToMaster() callback.
+        /// </summary>
+        bool isConnecting;
 
 		/// <summary>
 		/// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
@@ -76,17 +80,32 @@ namespace Photon.Pun.Demo.PunBasics
 
 		}
 
-		#endregion
+        private void Start()
+        {
+            StartCoroutine(Countdown());
+        }
+
+        private IEnumerator Countdown()
+        {
+            while (timeRemaining > 0)
+            {
+                yield return new WaitForSeconds(1.0f);
+                timeRemaining -= 1.0f;
+                //countdownText.text = "Take flight in: " + Mathf.FloorToInt(timeRemaining).ToString() + " seconds";
+            }
+            Connect();
+        }
+        #endregion
 
 
-		#region Public Methods
+        #region Public Methods
 
-		/// <summary>
-		/// Start the connection process. 
-		/// - If already connected, we attempt joining a random room
-		/// - if not yet connected, Connect this application instance to Photon Cloud Network
-		/// </summary>
-		public void Connect()
+        /// <summary>
+        /// Start the connection process. 
+        /// - If already connected, we attempt joining a random room
+        /// - if not yet connected, Connect this application instance to Photon Cloud Network
+        /// </summary>
+        public void Connect()
 		{
 			// we want to make sure the log is clear everytime we connect, we might have several failed attempted if connection failed.
 			feedbackText.text = "";

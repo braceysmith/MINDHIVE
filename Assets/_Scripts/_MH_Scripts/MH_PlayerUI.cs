@@ -59,7 +59,8 @@ namespace Photon.Pun.Demo.PunBasics
 
 			_canvasGroup = this.GetComponent<CanvasGroup>();
 			
-			this.transform.SetParent(GameObject.Find("Starling Canvas").GetComponent<Transform>(), false);
+			this.transform.SetParent(GameObject.Find("StarlingBody").GetComponent<Transform>(), false);
+            this.transform.localEulerAngles = new Vector3(0, 0, 91);
 		}
 
 		/// <summary>

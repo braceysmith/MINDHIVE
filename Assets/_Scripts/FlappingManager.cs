@@ -13,6 +13,7 @@ public class FlappingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         // Calculate the amount to rotate based on the rotation speed and whether to rotate in the positive or negative direction
         float rotationAmount = rotationSpeed * Time.deltaTime * (rotatePositive ? 1 : -1);
 
@@ -30,6 +31,24 @@ public class FlappingManager : MonoBehaviour
 
         // Set the local rotation of the object around the y-axis
         transform.localRotation = Quaternion.Euler(0f, clampedRotation, 0f);
+        */
+        // Calculate the amount to rotate based on the rotation speed and whether to rotate in the positive or negative direction
+        float rotationAmount = rotationSpeed * Time.deltaTime;
+
+        if (rotatePositive)
+        {
+            // Add the rotation amount to the current rotation
+            currentRotation += rotationAmount;
+
+            transform.localRotation = Quaternion.Euler(0f, currentRotation, 0f);
+        }
+        else
+        {
+            // Add the rotation amount to the current rotation
+            currentRotation -= rotationAmount;
+
+            transform.localRotation = Quaternion.Euler(0f, currentRotation, 0f);
+        }
     }
 }
 
